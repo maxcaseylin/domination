@@ -1,2 +1,0 @@
-# domination
-clone of dominion
