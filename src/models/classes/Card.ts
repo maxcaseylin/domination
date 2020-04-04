@@ -8,6 +8,11 @@ abstract class Card {
     this.types = types;
     this.cost = cost;
   }
+
+  //instanceOf methods
+  static isTreasure(object: any): object is TreasureCard {
+    return "goldValue" in object;
+  }
 }
 
 interface TreasureCard {
