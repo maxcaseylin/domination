@@ -1,6 +1,6 @@
 import { Card, TreasureCard, CardType } from "../classes/Card";
 
-class Penny extends Card implements TreasureCard {
+class Copper extends Card implements TreasureCard {
   goldValue: number;
 
   constructor() {
@@ -27,4 +27,4 @@ class Gold extends Card implements TreasureCard {
   }
 }
 
-export { Penny, Silver, Gold };
+export { Copper, Silver, Gold };
