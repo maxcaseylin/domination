@@ -1,6 +1,7 @@
 import * as Card from "./Card";
 import * as BaseTreasure from "../instances/BaseTreasure";
 import * as BaseVictory from "../instances/BaseVictory";
+import * as BaseKingdom from "../instances/BaseKingdom";
 
 export class Player {
   //we expect drawPile & discardPile to act like a stack?
@@ -39,6 +40,14 @@ export class Player {
 
   public getHand(): any {
     return this.hand;
+  }
+
+  public getId(): number {
+    return this.id;
+  }
+
+  public getBuys(): number {
+    return this.buys;
   }
 
   //instance methods
@@ -117,7 +126,17 @@ export class Player {
   public incActions(numActions: number): void {
     this.actions += numActions;
   }
+
+  //TODO: write discard methods
+
+  //FOR TESTING PURPOSES ONLY
+  public acquire(card: Card.Card) {
+    let index = Math.floor(Math.random() * this.drawPile.length);
+    this.drawPile[index] = card;
+  }
 }
 
+let testCard = new BaseTreasure.Copper();
 let testPlayer = new Player();
-console.log(testPlayer.getHand());
+testPlayer.acquire(new BaseKingdom.Cellar());
+console.log(testPlayer.getDrawPile());
