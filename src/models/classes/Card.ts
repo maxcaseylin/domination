@@ -18,8 +18,25 @@ abstract class Card {
   }
 
   //instanceOf methods
+  //required for interface type checks
   static isTreasure(object: any): object is TreasureCard {
     return "goldValue" in object;
+  }
+
+  static isVictory(object: any): object is VictoryCard {
+    return "victoryPoints" in object;
+  }
+
+  static isAttack(object: any): object is AttackCard {
+    return (<AttackCard>object).attack !== undefined;
+  }
+
+  static isReaction(object: any): object is ReactionCard {
+    return (<ReactionCard>object).react !== undefined;
+  }
+
+  static isAction(object: any): object is ActionCard {
+    return (<ActionCard>object).use !== undefined;
   }
 }
 

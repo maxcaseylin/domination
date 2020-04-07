@@ -2,6 +2,7 @@ import * as Card from "./Card";
 import * as BaseTreasure from "../instances/BaseTreasure";
 import * as BaseVictory from "../instances/BaseVictory";
 import * as BaseKingdom from "../instances/BaseKingdom";
+import * as Game from "./Game";
 
 export class Player {
   //we expect drawPile & discardPile to act like a stack?
@@ -26,7 +27,7 @@ export class Player {
   }
 
   //getters
-  public getDrawPile(): any {
+  public getDrawPile(): Array<Card.Card> {
     return this.drawPile;
   }
 
@@ -38,7 +39,7 @@ export class Player {
     return this.actions;
   }
 
-  public getHand(): any {
+  public getHand(): Array<Card.Card> {
     return this.hand;
   }
 
@@ -129,6 +130,29 @@ export class Player {
 
   //TODO: write discard methods
 
+  //mechanic for trashing cards
+  //takes in array of indexes and then sends those cards to trash
+  public trash(indexes: Array<number>, game: Game.Game): void {
+    let tempTrash: Array<Card.Card> = [];
+
+    //first sort the array
+    indexes.sort((n1, n2) => n1 - n2);
+    for (let i = indexes.length - 1; i >= 0; i--) {
+      tempTrash.push(this.hand[i]);
+      this.hand.splice(i, 1);
+    }
+
+    game.trash(tempTrash);
+  }
+
+  //TODO: write implementation
+  public selectCardsfromHand(numCards: number): Array<number> {
+    let selection: Array<number> = [];
+    for (let i = 0; i < numCards; i++) {
+      selection.push();
+    }
+  }
+
   //FOR TESTING PURPOSES ONLY
   public acquire(card: Card.Card) {
     let index = Math.floor(Math.random() * this.drawPile.length);
@@ -138,5 +162,8 @@ export class Player {
 
 let testCard = new BaseTreasure.Copper();
 let testPlayer = new Player();
+let testGame = new Game.Game();
 testPlayer.acquire(new BaseKingdom.Cellar());
-console.log(testPlayer.getDrawPile());
+testPlayer.trash([0, 2], testGame);
+
+console.log(testGame.getTrash());
